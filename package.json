@@ -1,0 +1,27 @@
+{
+  "name": "Reactjs_Form_Component",
+  "version": "1.0.0",
+  "description": "learning Reactjs",
+  "main": "none,all demo",
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kidbai/Reactjs_Form_Component.git"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Youngbye",
+  "license": "none",
+  "bugs": {
+    "url": "https://github.com/kidbai/Reactjs_Form_Component/issues"
+  },
+  "homepage": "https://github.com/kidbai/Reactjs_Form_Component",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-compass": "^2.1.0",
+    "gulp-jshint": "^1.11.2"
+  }
+}
