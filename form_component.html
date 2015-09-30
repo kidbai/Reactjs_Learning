@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./public/css/style.css">
+    <title>Reactjs_Form_component</title>
+</head>
+<body>
+
+    <div id="formApp"></div>
+    
+<script src="./js/lib/react.js"></script>
+<script src="./js/lib/JSXTransformer.js"></script>
+<script type="text/jsx">
+    var FormApp = React.createClass({
+        getInitialState: function () {
+            return {
+                idValue: "null",
+                pwdValue: "null",
+                selectValue: "Apple",
+                radioValue: "water",
+                checkValues: ["fish"],
+            }
+        },
+        handleSubmit: function (e) {
+            e.preventDefault();
+            var formData = {
+                idValue: this.refs.goodID.getDOMNode().value,
+                pwdValue: this.refs.goodPWD.getDOMNode().value,
+                selectValue: this.refs.goodSelect.getDOMNode().value,
+                radioValue: this.state.radioValue,
+                checkValues: this.state.checkValues,
+            }
+            console.log(' form data ');
+            console.log(formData);
+            alert(JSON.stringify(formData));
+        },
+        handleCheck: function (e) {
+            var checkValues = this.state.checkValues.slice();
+            var newVal = e.target.value;
+            if(e.target.checked){
+                console.log(e.target.value)
+            }
+            var index = checkValues.indexOf(newVal);
+            if(index === -1 && e.target.checked) {
+                checkValues.push(newVal);
+            }else if(index === -1 && !e.target.checked){
+                return;
+            }
+            else {
+                checkValues.splice(index, 1);
+            }
+            this.setState({
+                checkValues: checkValues
+            })
+        },
+        handleRadio: function (e){
+            this.setState({
+                radioValue: e.target.value,
+            })
+        },
+        render: function () {
+            return (
+                <form onSubmit={this.handleSubmit}>
+                    <input ref="goodID" type="text" placeholder="ID" className="form-item id" />
+                    <div className="clear"></div>
+                    <input ref="goodPWD" type="password" placeholder="Password" className="form-item pwd" />
+                    <div className="clear"></div>
+                    <select ref="goodSelect" defaultValue="Apple" className="form-item select">
+                        <option value="Apple">Apple</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Coco">Coco</option>
+                    </select>
+                    <div className="clear"></div>
+                    <Checkbox handleCheck={this.handleCheck} />
+                    <div className="clear"></div>
+                    <Radio handleRadio={this.handleRadio} />
+                    <button>提交</button>
+                </form>
+            )
+        }
+    });
+
+    var Checkbox = React.createClass({
+        render: function (){
+            return (
+                <div className="form-item">
+                    <label>鱼</label>
+                    <input onChange={this.props.handleCheck} type="checkbox" name="food" value="fish" defaultChecked />
+                    <label>肉</label>
+                    <input onChange={this.props.handleCheck} type="checkbox" name="food" value="meat" />
+                    <label>米</label>
+                    <input onChange={this.props.handleCheck} type="checkbox" name="food" value="rice" />
+                </div>
+            )
+        }
+    });
+
+    var Radio = React.createClass({
+        render: function () {
+            return (
+                <div className="form-item">
+                    <label>酒</label>
+                    <input onChange={this.props.handleRadio} type="radio" name="drink" value="wine" />
+                    <label>白开水</label>
+                    <input onChange={this.props.handleRadio} type="radio" name="drink" value="water" />
+                </div>
+            )
+        }
+    })
+
+    React.render(
+        <FormApp />,
+        document.getElementById("formApp")
+    )
+</script>
+</body>
+</html>
